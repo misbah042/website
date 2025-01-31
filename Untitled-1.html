@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Invitation</title>
+    <style>
+        body {
+            background-color: #ff69b4; /* Dark pink background */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .burst {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .burst-piece, .star, .flower, .butterfly {
+            position: absolute;
+            animation: float 5s infinite;
+        }
+        .burst-piece {
+            width: 10px;
+            height: 10px;
+        }
+        .star {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+        .flower {
+            width: 20px;
+            height: 20px;
+            background-color: pink;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+        .butterfly {
+            width: 30px;
+            height: 30px;
+            background-color: yellow;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        .button {
+            background-color: #800080; /* Pop up purple */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        .cake {
+            width: 200px; /* Enlarged size */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://media.giphy.com/media/LTcau7EnQLhHkxxG2u/giphy.gif?cid=790b7611k34g5t6hnccyutml74gbs8o85u09nee643jyg5es&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Cute Cake with Heart" class="cake">
+        <h1>Will you spend your birthday with me, Muhammad Affaq Chand?</h1>
+        <div>
+            <button class="button" onclick="celebrate()">Yes</button>
+            <button class="button" onclick="celebrate()">I would love to</button>
+        </div>
+        <div class="burst"></div>
+    </div>
+    <audio id="background-music">
+        <source src="https://pagalfree.com/musics/128-Tere%20Hawaale%20-%20Laal%20Singh%20Chaddha%20128%20Kbps.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        function celebrate() {
+            const audio = document.getElementById('background-music');
+            audio.currentTime = 222; // Start at 3:42 (222 seconds)
+            audio.play().catch(error => {
+                console.error('Error playing audio:', error);
+            });
+
+            // Stop the audio after 17 seconds (3:59)
+            setTimeout(() => {
+                audio.pause();
+            }, 17000);
+
+            // Add burst effect
+            const burstContainer = document.querySelector('.burst');
+            for (let i = 0; i < 200; i++) {
+                const burstPiece = document.createElement('div');
+                burstPiece.classList.add('burst-piece');
+                burstPiece.style.left = Math.random() * 100 + '%';
+                burstPiece.style.backgroundColor = getRandomColor();
+                burstPiece.style.animationDelay = Math.random() * 5 + 's';
+                burstContainer.appendChild(burstPiece);
+            }
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = Math.random() * 100 + '%';
+                star.style.backgroundColor = getRandomStarColor();
+                star.style.animationDelay = Math.random() * 5 + 's';
+                burstContainer.appendChild(star);
+            }
+            for (let i = 0; i < 20; i++) {
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.animationDelay = Math.random() * 5 + 's';
+                burstContainer.appendChild(flower);
+            }
+            for (let i = 0; i < 20; i++) {
+                const butterfly = document.createElement('div');
+                butterfly.classList.add('butterfly');
+                butterfly.style.left = Math.random() * 100 + '%';
+                butterfly.style.animationDelay = Math.random() * 5 + 's';
+                burstContainer.appendChild(butterfly);
+            }
+        }
+
+        function getRandomColor() {
+            const colors = ['red', 'yellow', 'blue', 'green', 'purple', 'orange', 'pink', 'cyan', 'magenta', 'gold', 'silver'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function getRandomStarColor() {
+            const colors = ['red', 'pink'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
